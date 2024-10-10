@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: ./app
+    ports:
+      - "8000:8000"  # Ensure this line is present
+    networks:
+      - mynetwork
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
